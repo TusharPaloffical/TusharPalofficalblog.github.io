@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <style>
+        /* Add your custom CSS styles here, if any */
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo">Logo</div>
+        <ul class="navi">
+            <li class="li1" id="Home"><a href="#">Home</a></li>
+            <li class="li1" id="blog"><a href="#">Blog</a></li>
+            <li class="li1" id="post"><a href="#">Post</a></li>
+            <li class="li1" id="contact"><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="container2">
+        <div class="search"></div>
+        <div class="toppost"></div>
+        <div class="recent"></div>
+    </div>
+
+    <div class="ani" id="changecon">
+        <img class="gif1" src="ani.gif" alt="Animated GIF">
+    </div>
+
+    <script>
+        let ho = document.getElementById('Home');
+        ho.addEventListener('click', function() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'home.html', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) { // Check if the request was successful
+                    let resContent = xhr.responseText; // Get the response text
+                    let chng = document.getElementById('changecon');
+                    chng.innerHTML = resContent; // Update the element's content
+                }
+            };
+
+            xhr.send();
+        });
+
+        document.getElementById('blog').addEventListener('click', bloghandler);
+
+        function bloghandler() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'blog.html', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) { // Check if the request was successful
+                    let resContent = xhr.responseText; // Get the response text
+                    let chng = document.getElementById('changecon');
+                    chng.innerHTML = resContent; // Update the element's content
+                }
+            };
+
+            xhr.send();
+        }
+        
+        document.getElementById('post').addEventListener('click', posthandler);
+
+        function posthandler() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'post.html', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) { // Check if the request was successful
+                    let resContent = xhr.responseText; // Get the response text
+                    let chng = document.getElementById('changecon');
+                    chng.innerHTML = resContent; // Update the element's content
+                }
+            };
+
+            xhr.send();
+        }
+
+        document.getElementById('contact').addEventListener('click', contacthandler);
+
+        function contacthandler() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'contact.html', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) { // Check if the request was successful
+                    let resContent = xhr.responseText; // Get the response text
+                    let chng = document.getElementById('changecon');
+                    chng.innerHTML = resContent; // Update the element's content
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
