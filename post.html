@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Blog Page</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Define some common styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Style the blog post */
+        .blog-post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-post h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .blog-post p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* Style the sidebar */
+        .sidebar {
+            background-color: #f9f9f9;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        /* Style the footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+        <p>Your source for interesting articles.</p>
+    </header>
+    
+    <div class="container">
+           
+    </div>
+    
+    <div class="container2">
+           
+    </div>
+
+    
+    <footer>
+        &copy; 2023 My Blog
+    </footer>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        google.charts.load('current', { packages: ['corechart', 'table', 'gauge'] });
+        google.charts.setOnLoadCallback(drawChart);
+    
+        function drawChart() {
+            var spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1TpTOxVZ2EC8LXb0CfwF-JHwXu6Vg9dXHWpzIBFNmLu4/edit?resourcekey#gid=1240177384';
+    
+            var query = new google.visualization.Query(spreadsheetUrl);
+            query.send(handleQueryResponse);
+        }
+    
+        function handleQueryResponse(response) {
+            if (response.isError()) {
+                console.error('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                return;
+            }
+    
+            var dataTable = response.getDataTable();
+            var cellValue1 = dataTable.getValue(8, 0);
+            var cellValue2 = dataTable.getValue(6, 0);
+    
+            let container = document.querySelector(".container");
+            let container2 = document.querySelector(".container2");
+            var imageElement = document.createElement("img");
+    
+            imageElement.onload = function() {
+                console.log('Image loaded successfully.');
+                container2.textContent = cellValue2;
+                container.appendChild(imageElement);
+                
+            };
+    
+            imageElement.onerror = function() {
+                console.log('Image failed to load. Displaying text content instead.');
+                container2.textContent = cellValue2;
+            };
+    
+            imageElement.src = cellValue1;
+        }
+    </script>
+         
+</body>
+</html>

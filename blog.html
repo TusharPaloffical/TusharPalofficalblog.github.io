@@ -9,6 +9,7 @@
     
 </head>
 <body>
+    <!--
     <h1>Submit a Blog Post</h1>
     <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeqL2DkAxKF8hezA242XRDLKtrTbI6zk90JQQHA0oeIV80uiA/formResponse" method="post">
         <label for="NAME">NAME:</label>
@@ -18,12 +19,27 @@
         <input type="text" id="EMAIL" name="entry.490625117"  required><br><br>
 
         <label for="contact">POST:</label><br>
-        <textarea id="contact" name="entry.159439584"  required></textarea><br><br>
-        <!-- <h1>Upload an Image</h1>
+        <textarea id="contact" name="entry.159439584"  required></textarea><br><br> -->
+        <h1>Upload an Image</h1>
             <label for="image">Select Image:</label>
-            <input type="file" id="image" name="entry.2079433416" accept="image/*" required><br><br> -->
+            <input type="file" id="image" accept="image/*">
+            <img src="" alt="">
+            <br><br>
 
-        <button type="submit">submit</button>
+        <!-- <button type="submit">submit</button> -->
     </form>
+    <script>
+        let file = document.querySelector("input");
+        let img = document.querySelector("img");
+        file.addEventListener('change',()=>{
+            let fr = new FileReader();
+            fr.addEventListener('loadend',()=>{
+                let res = fr.resulty;
+                img.src=res;
+                console.log(res);
+            })
+            fr.readAsDataURL(file.files[0])
+        })
+    </script>
 </body>
 </html>

@@ -4,11 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+    
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #060606;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
     <!-- <link rel="stylesheet" type="text/css" href="blog.css"> -->
 </head>
 <body>
     <h1>Contact Us</h1>
-    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScC3DIeE9HFzowaS7EtaHzDctJr6KFDNv1VL9pIzPHU6cZkXg/formResponse" method="post">
+    <form id="contactForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScC3DIeE9HFzowaS7EtaHzDctJr6KFDNv1VL9pIzPHU6cZkXg/formResponse" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="entry.2104731132" required><br><br>
 
@@ -16,9 +67,31 @@
         <input type="email" id="email" name="entry.696805747" required><br><br>
 
         <label for="message">Reason For Contact:</label><br>
-        <textarea id="message" name="entry.339707865"  required></textarea><br><br>
+        <textarea id="message" name="entry.339707865" required></textarea><br><br>
 
-        <button type="submit">Submit</button>  
+        <button id="submit" type="submit">Submit</button>  
     </form>
+
+
+    <script>
+        let ho = document.getElementById('submit');
+        ho.addEventListener('click', function() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'greet.html', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) { // Check if the request was successful
+                    let resContent = xhr.responseText; // Get the response text
+                    let chng = document.getElementById('contactForm');
+                    chng.innerHTML = resContent; // Update the element's content
+                }
+            };
+
+            xhr.send();
+        });
+
+    </script>
 </body>
+
 </html>

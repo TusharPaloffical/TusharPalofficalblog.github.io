@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Form</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <form>
+        <label for="image">Select Image:</label>
+        <input type="file" id="image" accept="image/*">
+        <img id="preview" src="" alt="">
+        <br><br>
+    </form>
+    <script>
+        let url = "https://script.google.com/macros/s/AKfycbzemOTHs35CpQtM1nxxqbLBfngOfKAhB_Gnc3KgKInUBMR3lsohdKjaB_6WzQCOtUk/exec";
+        let file = document.querySelector("#image"); // Corrected query selector
+        let img = document.querySelector("#preview"); // Corrected query selector
+        file.addEventListener('change',()=>{
+            let fr = new FileReader();
+            fr.addEventListener('load',()=>{
+                let res = fr.result;
+                img.src = res;
+                let spt = res.split("base64,")[1];
+                let obj = {
+                    base64: spt,
+                    type: file.files[0].type,
+                    name: file.files[0].name
+                }
+                fetch(url,{
+                    method: "POST", // Corrected method name
+                    body: JSON.stringify(obj) // Corrected method name and added JSON.stringify
+                })
+                .then(r => r.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+            });
+            fr.readAsDataURL(file.files[0]);
+        });
+    </script>
+
+</body>
+</html>
